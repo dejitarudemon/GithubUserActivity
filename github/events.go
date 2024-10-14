@@ -5,7 +5,6 @@ type Event struct {
 	Type       string      `json:"type"`
 	Agent      Actor       `json:"actor"`
 	Repository Repo        `json:"repository"`
-	Load       Payload     `json:"payload"`
 	Public     bool        `json:"public"`
 	CreatedAt  CreatedTime `json:"created_at"`
 }
@@ -23,9 +22,6 @@ type Repo struct {
 	Id   int    `json:"id"`
 	Name string `json:"name"`
 	URL  string `json:"url"`
-}
-
-type Payload struct {
 }
 
 type Events []Event
