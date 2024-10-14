@@ -25,3 +25,24 @@ type Repo struct {
 }
 
 type Events []Event
+
+// Event types
+const (
+	COMMIT                   = "CommitCommentEvent"
+	CREATE                   = "CreateEvent"
+	DELETE                   = "DeleteEvent"
+	FORK                     = "ForkEvent"
+	GOLLUM                   = "GollumEvent"
+	ISSUECOMMENT             = "IssueCommentEvent"
+	ISSUE                    = "IssueEvent"
+	MEMBER                   = "MemberEvent"
+	PUBLIC                   = "PublicEvent"
+	PULLREQUEST              = "PullRequestEvent"
+	PULLREQUESTREVIEW        = "PullRequestReviewEvent"
+	PULLREQUESTREVIEWCOMMENT = "PullRequestReviewCommentEvent"
+	PULLREQUESTREVIEWTHREAD  = "PullRequestReviewThreadEvent"
+	PUSH                     = "PushEvent"
+	RELEASE                  = "ReleaseEvent"
+	SPONSORSHIP              = "SponsorhipEvent"
+	WATCH                    = "WatchEvent"
+)
