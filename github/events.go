@@ -11,6 +11,12 @@ type Event struct {
 }
 
 type Actor struct {
+	Id           int    `json:"id"`
+	Login        string `json:"login"`
+	DisplayLogin string `json:"display_login"`
+	GravatarId   string `json:"gravatar_id"`
+	URL          string `json:"url"`
+	AvatarURL    string `json:"avatar_url"`
 }
 
 type Repo struct {
