@@ -20,6 +20,9 @@ type Actor struct {
 }
 
 type Repo struct {
+	Id   int    `json:"id"`
+	Name string `json:"name"`
+	URL  string `json:"url"`
 }
 
 type Payload struct {
