@@ -7,7 +7,11 @@ import (
 	"time"
 )
 
-func Get(url string) (http.Response, error) {
+const GITHUBURL = "https://api.github.com/"
+const GITHUBEVENTS = GITHUBURL + "users/"
+const EVENTS = "/events"
+
+func get(url string) (http.Response, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	req, err := http.NewRequestWithContext(
 		ctx,
@@ -27,4 +31,8 @@ func Get(url string) (http.Response, error) {
 	}
 
 	return *resp, nil
+}
+
+func GetEvenets(username string) (Events, error) {
+
 }
