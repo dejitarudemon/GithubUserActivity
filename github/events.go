@@ -1,7 +1,7 @@
 package github
 
 type Event struct {
-	Id         int    `json:"id"`
+	Id         string `json:"id"`
 	Type       string `json:"type"`
 	Agent      Actor  `json:"actor"`
 	Repository Repo   `json:"repository"`
@@ -20,7 +20,7 @@ type Actor struct {
 }
 
 type Repo struct {
-	Id   int    `json:"id"`
+	Id   string `json:"id"`
 	Name string `json:"name"`
 	URL  string `json:"url"`
 }
