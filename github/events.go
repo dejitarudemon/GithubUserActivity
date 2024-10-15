@@ -11,7 +11,7 @@ type Event struct {
 }
 
 type Actor struct {
-	Id           string `json:"id"`
+	Id           int    `json:"id"`
 	Login        string `json:"login"`
 	DisplayLogin string `json:"display_login"`
 	GravatarId   string `json:"gravatar_id"`
@@ -30,7 +30,7 @@ type Load struct {
 	Pages   []string `json:"pages,omitempty"`
 	Member  string   `json:"member,omitempty"`
 	Changes string   `json:"changes,omitempty"`
-	Number  string   `json:"number,omitempty"`
+	Number  int      `json:"number,omitempty"`
 	Ref     string   `json:"ref,omitempty"`
 }
 

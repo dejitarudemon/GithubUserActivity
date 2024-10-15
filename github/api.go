@@ -14,7 +14,7 @@ const GITHUBURL = "https://api.github.com/"
 const GITHUBEVENTS = GITHUBURL + "users/"
 const EVENTS = "/events?page="
 
-func get(url string) (http.Response, error) {
+func get(url string) ([]byte, int, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
@@ -26,15 +26,18 @@ func get(url string) (http.Response, error) {
 	)
 
 	if err != nil {
-		return http.Response{}, err
+		return []byte{}, 0, err
 	}
 
 	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return http.Response{}, err
+	defer resp.Body.Close()
+
+	data, err := io.ReadAll(resp.Body)
+	if err != nil && err != io.EOF {
+		return []byte{}, 0, err
 	}
 
-	return *resp, nil
+	return data, resp.StatusCode, nil
 }
 
 func GetEvenets(username string) (Events, error) {
@@ -45,20 +48,13 @@ func GetEvenets(username string) (Events, error) {
 	events := make(Events, 0)
 	for i := 1; ; i++ {
 		url := GITHUBEVENTS + username + EVENTS + strconv.Itoa(i)
-		resp, err := get(url)
+		data, status, err := get(url)
 		if err != nil {
 			return Events{}, err
 		}
 
-		if resp.StatusCode != 200 {
+		if status != 200 {
 			return Events{}, errors.New("CAN'T CONNECT TO GITHUB")
-		}
-
-		defer resp.Body.Close()
-
-		data, err := io.ReadAll(resp.Body)
-		if err != nil && err != io.EOF {
-			return Events{}, err
 		}
 
 		eventsOnPage := new(Events)
