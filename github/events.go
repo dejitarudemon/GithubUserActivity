@@ -6,8 +6,8 @@ type Event struct {
 	Agent      Actor  `json:"actor"`
 	Repository Repo   `json:"repository"`
 	Public     bool   `json:"public"`
-	Payload
-	CreatedAt string `json:"created_at"`
+	Payload    Load   `json:"payload"`
+	CreatedAt  string `json:"created_at"`
 }
 
 type Actor struct {
@@ -26,8 +26,12 @@ type Repo struct {
 }
 
 type Load struct {
-	Action string `json:"action"`
-	//etc
+	Action  string   `json:"action,omitempty"`
+	Pages   []string `json:"pages,omitempty"`
+	Member  string   `json:"member,omitempty"`
+	Changes string   `json:"changes,omitempty"`
+	Number  int      `json:"number,omitempty"`
+	Ref     string   `json:"ref,omitempty"`
 }
 
 type Events []Event
