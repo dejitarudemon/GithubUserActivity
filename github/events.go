@@ -1,7 +1,7 @@
 package github
 
 type Event struct {
-	Id         int    `json:"id"`
+	Id         string `json:"id"`
 	Type       string `json:"type"`
 	Agent      Actor  `json:"actor"`
 	Repository Repo   `json:"repository"`
@@ -11,7 +11,7 @@ type Event struct {
 }
 
 type Actor struct {
-	Id           int    `json:"id"`
+	Id           string `json:"id"`
 	Login        string `json:"login"`
 	DisplayLogin string `json:"display_login"`
 	GravatarId   string `json:"gravatar_id"`
@@ -20,7 +20,7 @@ type Actor struct {
 }
 
 type Repo struct {
-	Id   int    `json:"id"`
+	Id   string `json:"id"`
 	Name string `json:"name"`
 	URL  string `json:"url"`
 }
@@ -30,7 +30,7 @@ type Load struct {
 	Pages   []string `json:"pages,omitempty"`
 	Member  string   `json:"member,omitempty"`
 	Changes string   `json:"changes,omitempty"`
-	Number  int      `json:"number,omitempty"`
+	Number  string   `json:"number,omitempty"`
 	Ref     string   `json:"ref,omitempty"`
 }
 

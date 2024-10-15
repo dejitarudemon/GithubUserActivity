@@ -7,25 +7,23 @@ import (
 	"io"
 	"net/http"
 	"strconv"
-	"strings"
 	"time"
 )
 
 const GITHUBURL = "https://api.github.com/"
 const GITHUBEVENTS = GITHUBURL + "users/"
 const EVENTS = "/events?page="
-const ENDCONTENT = "5"
-const LENGTH = "conten-length"
 
 func get(url string) (http.Response, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+	defer cancel()
+
 	req, err := http.NewRequestWithContext(
 		ctx,
-		"GET",
+		http.MethodGet,
 		url,
-		strings.NewReader(""),
+		nil,
 	)
-	defer cancel()
 
 	if err != nil {
 		return http.Response{}, err
@@ -56,8 +54,10 @@ func GetEvenets(username string) (Events, error) {
 			return Events{}, errors.New("CAN'T CONNECT TO GITHUB")
 		}
 
+		defer resp.Body.Close()
+
 		data, err := io.ReadAll(resp.Body)
-		if err != nil {
+		if err != nil && err != io.EOF {
 			return Events{}, err
 		}
 
