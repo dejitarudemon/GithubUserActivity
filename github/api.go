@@ -30,6 +30,9 @@ func get(url string) ([]byte, int, error) {
 	}
 
 	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return []byte{}, 0, err
+	}
 	defer resp.Body.Close()
 
 	data, err := io.ReadAll(resp.Body)
